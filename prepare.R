@@ -8,9 +8,9 @@ patient %>% mutate(OS_STATUS=recode(OS_STATUS, '1:DECEASED'='1', '0:LIVING'='0')
 
 patient %>% mutate(DFS_STATUS=recode(DFS_STATUS, '1:Recurred/Progressed'='1', '0:DiseaseFree'='0'))->patient
 
-patient$DFS_STATUS<-as.factor(patient$DFS_STATUS)
+#patient$DFS_STATUS<-as.factor(patient$DFS_STATUS)
 
-patient$OS_STATUS<-as.factor(patient$OS_STATUS)
+#patient$OS_STATUS<-as.factor(patient$OS_STATUS)
 
 
 ### import sample data with removing header comment lines
@@ -70,7 +70,7 @@ data$SAMPLE_ID<-gsub('\\.', '-',data$SAMPLE_ID)
 
 annot %>% inner_join(data,by="SAMPLE_ID")->all
 
-all[all == ''] <- NA
+all[all == "" | all == " "] <- NA 
 
 save(all,file="all.rda")
 
